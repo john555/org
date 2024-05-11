@@ -9,6 +9,7 @@
     "@nestjs/core": "^10.0.2",
     "@nestjs/platform-express": "^10.0.2",
     "@nx/nest": "^19.0.2",
+    "@stitches/react": "^1.2.8",
     "next": "^14.2.3",
     "react": "18.3.1",
     "react-dom": "18.3.1",
