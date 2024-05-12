@@ -1,5 +1,6 @@
-import { globalStyles } from './global.styles';
-import { getCssText } from './stitches.config';
+import { darkTheme } from '@styles/dark-theme';
+import { globalStyles } from '@styles/global.styles';
+import { getCssText } from '@styles/stitches.config';
 
 export const metadata = {
   title: 'Welcome to admin',
@@ -18,7 +19,7 @@ export default function RootLayout({
       <head>
         <style id="stitches" dangerouslySetInnerHTML={{__html: getCssText()}}></style>
       </head>
-      <body>{children}</body>
+      <body>{children} Layout</body>
     </html>
   );
 }
