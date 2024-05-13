@@ -16,7 +16,9 @@ export const {
 } = createStitches({
   theme: {
     colors: {
-      primary: '#bada55'
+      primary: '#bada55',
+      athensGray: '#ebeef1',
+      gray700: 'rgb(65, 69, 82)'
     },
     space: {
       px: '1px',
@@ -39,7 +41,10 @@ export const {
       56: '14rem',
       64: '16rem',
     },
-    fontSizes: {},
+    fontSizes: {
+      m: '14px',
+      sm: '12px',
+    },
     fonts: {
       sans: 'ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji',
       mono: 'ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace',
@@ -47,7 +52,9 @@ export const {
     fontWeights: {},
     lineHeights: {},
     letterSpacings: {},
-    sizes: {},
+    sizes: {
+      full: '100%',
+    },
     borderWidths: {
       default: '1px',
       0: '0',
@@ -64,7 +71,9 @@ export const {
       lg: '0.5rem',
       round: '9999px',
     },
-    shadows: {},
+    shadows: {
+      border: 'inset 0 -1px 0 0 $colors$athensGray'
+    },
     zIndices: {},
     transitions: {},
   },
@@ -100,6 +109,31 @@ export const {
     my: (value: string | number) => ({
       marginTop: value,
       marginBottom: value,
+    }),
+
+    // Abbreviated padding properties
+    p: (value: string | number) => ({
+      padding: value,
+    }),
+    pt: (value: string | number) => ({
+      paddingTop: value,
+    }),
+    pr: (value: string | number) => ({
+      paddingRight: value,
+    }),
+    pb: (value: string | number) => ({
+      paddingBottom: value,
+    }),
+    pl: (value: string | number) => ({
+      paddingLeft: value,
+    }),
+    px: (value: string | number) => ({
+      paddingLeft: value,
+      paddingRight: value,
+    }),
+    py: (value: string | number) => ({
+      paddingTop: value,
+      paddingBottom: value,
     }),
 
     // A property for applying width/height together
