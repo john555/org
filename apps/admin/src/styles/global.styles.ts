@@ -20,9 +20,7 @@ export const globalStyles = globalCss({
   a: { color: 'inherit', textDecoration: 'inherit' },
   pre: {
     fontFamily: '$mono',
-    backgroundColor: 'rgba(55, 65, 81, 1)',
     borderRadius: '0.25rem',
-    color: 'rgba(229, 231, 235, 1)',
     overflow: 'scroll',
     padding: '0.5rem 0.75rem',
   },
