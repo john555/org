@@ -8,7 +8,12 @@ export const globalStyles = globalCss({
     tabSize: 4,
     scrollBehavior: 'smooth',
   },
-  body: { fontFamily: 'inherit', lineHeight: 'inherit', margin: '0' },
+  body: {
+    fontFamily: 'inherit',
+    lineHeight: 'inherit',
+    margin: '0',
+    color: '$gray700',
+  },
   'h1, h2, h3, p, pre': { margin: '0' },
   '*, ::before, ::after': {
     boxSizing: 'border-box',
