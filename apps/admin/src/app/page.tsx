@@ -1,5 +1,6 @@
 'use client';
 import { Button } from '@components/button';
+import { Table } from '@components/table';
 import { useState } from 'react';
 
 export default function Index() {
@@ -12,6 +13,7 @@ export default function Index() {
       <Button type="button" className="p-5" onClick={() => setClicked(true)}>
         Click
       </Button>
+      <Table></Table>
     </div>
   );
 }

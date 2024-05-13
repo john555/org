@@ -19,7 +19,7 @@ export default function RootLayout({
       <head>
         <style id="stitches" dangerouslySetInnerHTML={{__html: getCssText()}}></style>
       </head>
-      <body>{children} Layout</body>
+      <body>{children}</body>
     </html>
   );
 }
