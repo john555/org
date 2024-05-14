@@ -5,11 +5,11 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-import { UserModule } from '@/user/user.module';
+import { StaffMemberModule } from '@/staff-member/staff-member.module';
 
 @Module({
   imports: [
-    UserModule,
+    StaffMemberModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       playground: process.env.NODE_ENV !== 'production',
