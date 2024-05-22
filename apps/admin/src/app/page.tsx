@@ -13,7 +13,11 @@ export default function Index() {
       <Button type="button" className="p-5" onClick={() => setClicked(true)}>
         Click
       </Button>
-      <Table></Table>
+      <div style={{ width: 400, overflow: 'auto' }}>
+        <div style={{ width: 600 }}>
+          <Table></Table>
+        </div>
+      </div>
     </div>
   );
 }

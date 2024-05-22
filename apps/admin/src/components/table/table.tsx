@@ -5,6 +5,9 @@ export const Table = () => {
     <TableRoot>
       <Thead>
         <Tr>
+          <Th sticky>
+            <input type="checkbox" />
+          </Th>
           <Th>Name</Th>
           <Th>Email</Th>
           <Th>Payment</Th>
@@ -12,16 +15,25 @@ export const Table = () => {
       </Thead>
       <Tbody>
         <Tr>
+          <Td sticky>
+            <input type="checkbox" />
+          </Td>
           <Td>John Doe</Td>
           <Td>john.do@example.com</Td>
           <Td>Cash</Td>
         </Tr>
         <Tr>
+          <Td sticky>
+            <input type="checkbox" />
+          </Td>
           <Td>John Doe</Td>
           <Td>john.do@example.com</Td>
           <Td>Cash</Td>
         </Tr>
-        <Tr>
+        <Tr selected>
+          <Td sticky>
+            <input checked type="checkbox" />
+          </Td>
           <Td>John Doe</Td>
           <Td>john.do@example.com</Td>
           <Td>Cash</Td>
