@@ -18,6 +18,7 @@ export const {
     colors: {
       primary: '#bada55',
       athensGray: '#ebeef1',
+      hoverGray: '#f5f6f8',
       gray700: 'rgb(65, 69, 82)'
     },
     space: {
