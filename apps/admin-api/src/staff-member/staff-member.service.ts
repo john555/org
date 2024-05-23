@@ -1,13 +1,27 @@
-import { StaffMember } from './models/staff-member.model';
+import { Inject } from '@nestjs/common';
+import { StaffMember } from './staff-member.entity';
+import { Repository } from 'typeorm';
 
 export class StaffMemberService {
-  async findOneById(id: string): Promise<StaffMember> {
-    return {
-        id,
-        email: 'someone@example.com',
-        first_name: "jo",
-        last_name: "m",
-        created_at: new Date("2024/09/01")
-    };
+  constructor(
+    @Inject('STAFF_MEMBER_REPOSITORY')
+    private readonly staffMemberRepository: Repository<StaffMember>
+  ) {}
+
+  async findOneById(id: string) {
+    return this.staffMemberRepository.findOne({
+      where: { id },
+    });
+  }
+
+  async create() {
+    const staffMember = this.staffMemberRepository.create({
+      email: 'someone@example.com',
+      firstName: 'John',
+      lastName: 'Doe',
+      name: 'John Doe',
+      initials: ['J', 'D'],
+    });
+    return this.staffMemberRepository.save(staffMember);
   }
 }
