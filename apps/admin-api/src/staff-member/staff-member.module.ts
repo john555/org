@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { StaffMemberResolver } from './staff-member.resolver';
 import { StaffMemberService } from './staff-member.service';
 import { staffMemberProviders } from './staff-member.providers';
-import { DatabaseModule } from '@/database-module/database.module';
+import { DatabaseModule } from '@/database/database.module';
 
 @Module({
   imports: [DatabaseModule],

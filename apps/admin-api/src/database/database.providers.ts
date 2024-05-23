@@ -7,13 +7,13 @@ export const databaseProviders = [
     useFactory: async () => {
       const dataSource = new DataSource({
         type: 'mysql',
-        host: '127.0.0.1',
-        port: 3306,
-        username: 'root',
-        password: 'root@localhost',
-        database: 'org',
+        host: process.env.DB_HOST,
+        port: parseInt(process.env.DB_PORT || '', 10),
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
         entities: [StaffMember],
-        synchronize: true,
+        synchronize: process.env.NODE_ENV === 'development',
       });
 
       return dataSource.initialize();
