@@ -1,11 +1,19 @@
 import { Module } from '@nestjs/common';
+import { DataSource } from 'typeorm';
 import { StaffMemberResolver } from './staff-member.resolver';
 import { StaffMemberService } from './staff-member.service';
-import { staffMemberProviders } from './staff-member.providers';
-import { DatabaseModule } from '@/database/database.module';
+import { StaffMember } from './staff-member.entity';
 
 @Module({
-  imports: [DatabaseModule],
-  providers: [StaffMemberResolver, StaffMemberService, ...staffMemberProviders],
+  providers: [
+    StaffMemberResolver,
+    StaffMemberService,
+    {
+      provide: 'STAFF_MEMBER_REPOSITORY',
+      useFactory: (dataSource: DataSource) =>
+        dataSource.getRepository(StaffMember),
+      inject: ['DATA_SOURCE'],
+    },
+  ],
 })
 export class StaffMemberModule {}
