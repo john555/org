@@ -14,6 +14,12 @@ export class StaffMemberService {
     });
   }
 
+  async findByShopId(id: string) {
+    return this.staffMemberRepository.find({
+      where: { shop: { id } },
+    });
+  }
+
   async create() {
     const staffMember = this.staffMemberRepository.create({
       email: 'someone@example.com',
@@ -21,6 +27,11 @@ export class StaffMemberService {
       lastName: 'Doe',
       name: 'John Doe',
       initials: ['J', 'D'],
+      shop: { 
+        name: 'My Shop',
+        email: 'someone@example.com',
+        url: 'https://example.com',
+       },
     });
     return this.staffMemberRepository.save(staffMember);
   }

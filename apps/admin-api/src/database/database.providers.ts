@@ -1,3 +1,4 @@
+import { Shop } from '@/shop/shop.entity';
 import { StaffMember } from '@/staff-member/staff-member.entity';
 import { DataSource } from 'typeorm';
 
@@ -12,7 +13,7 @@ export const databaseProviders = [
         username: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         database: process.env.DB_NAME,
-        entities: [StaffMember],
+        entities: [StaffMember, Shop],
         synchronize: process.env.NODE_ENV === 'development',
       });
 

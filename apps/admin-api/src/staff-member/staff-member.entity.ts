@@ -1,8 +1,10 @@
+import { Shop } from '@/shop/shop.entity';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -15,23 +17,26 @@ export class StaffMember {
   id: string;
 
   @Column()
-  @Field({description: 'Email of the staff member'})
+  @Field({ description: 'Email of the staff member' })
   email: string;
 
   @Column({ nullable: true })
-  @Field({ nullable: true, description: 'First name of the staff member'})
+  @Field({ nullable: true, description: 'First name of the staff member' })
   firstName?: string;
 
   @Column({ nullable: true })
-  @Field({ nullable: true, description: 'Last name of the staff member'})
+  @Field({ nullable: true, description: 'Last name of the staff member' })
   lastName?: string;
 
   @Column({ nullable: true })
-  @Field({ nullable: true, description: 'Name of the staff member'})
+  @Field({ nullable: true, description: 'Name of the staff member' })
   name?: string;
 
   @Column({ nullable: true, type: 'simple-array' })
-  @Field(() => [String], { nullable: true, description: 'Initials of the staff member'})
+  @Field(() => [String], {
+    nullable: true,
+    description: 'Initials of the staff member',
+  })
   initials?: string[];
 
   // @Column({ default: false })
@@ -39,11 +44,11 @@ export class StaffMember {
   // isShopOwner: boolean;
 
   @Column({ default: false })
-  @Field(() => Boolean, { description: 'Is the staff member active' } )
+  @Field(() => Boolean, { description: 'Is the staff member active' })
   active?: boolean;
 
   @Column({ nullable: true })
-  @Field({ nullable: true, description: 'Phone number of the staff member'})
+  @Field({ nullable: true, description: 'Phone number of the staff member' })
   phone?: string;
 
   // @OneToOne(() => MediaImage)
@@ -56,6 +61,10 @@ export class StaffMember {
   createdAt: Date;
 
   @UpdateDateColumn()
-  @Field(() => Date, { description: 'Date the staff member was last updated' } )
+  @Field(() => Date, { description: 'Date the staff member was last updated' })
   updatedAt: Date;
+
+  @ManyToOne(() => Shop, (shop) => shop.staffMembers, { cascade: true })
+  @Field(() => Shop, { description: 'The shop the staff member belongs to' })
+  shop: Shop;
 }

@@ -10,6 +10,7 @@ import { DatabaseModule } from '@/database/database.module';
 import { GraphQLFormattedError } from 'graphql';
 import { ConfigModule } from '@nestjs/config';
 import { exampleConfig } from '@/config/example';
+import { ShopModule } from '@/shop/shop.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { exampleConfig } from '@/config/example';
     }),
     DatabaseModule,
     StaffMemberModule,
+    ShopModule,
   ],
   controllers: [AppController],
   providers: [AppService],

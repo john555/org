@@ -1,10 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { DataSource } from 'typeorm';
 import { StaffMemberResolver } from './staff-member.resolver';
 import { StaffMemberService } from './staff-member.service';
 import { StaffMember } from './staff-member.entity';
+import { ShopModule } from '@/shop/shop.module';
 
 @Module({
+  imports: [forwardRef(() => ShopModule)],
   providers: [
     StaffMemberResolver,
     StaffMemberService,
@@ -15,5 +17,6 @@ import { StaffMember } from './staff-member.entity';
       inject: ['DATA_SOURCE'],
     },
   ],
+  exports: [StaffMemberService]
 })
 export class StaffMemberModule {}
