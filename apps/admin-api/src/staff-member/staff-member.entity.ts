@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -16,7 +17,7 @@ export class StaffMember {
   @Field(() => ID)
   id: string;
 
-  @Column()
+  @Column({unique: true})
   @Field({ description: 'Email of the staff member' })
   email: string;
 
@@ -64,7 +65,15 @@ export class StaffMember {
   @Field(() => Date, { description: 'Date the staff member was last updated' })
   updatedAt: Date;
 
+  @Column({ nullable: true })
+  @Field(() => [String], {
+    nullable: true,
+    description: 'Id of the shop the staff member belongs to',
+  })
+  shopId: string;
+
   @ManyToOne(() => Shop, (shop) => shop.staffMembers, { cascade: true })
+  @JoinColumn({ name: 'shopId' })
   @Field(() => Shop, { description: 'The shop the staff member belongs to' })
   shop: Shop;
 }

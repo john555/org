@@ -1,6 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { StaffMember } from './staff-member.entity';
 import { Repository } from 'typeorm';
+import { StaffMemberCreateInput } from './staff-member.dtos';
 
 export class StaffMemberService {
   constructor(
@@ -20,18 +21,16 @@ export class StaffMemberService {
     });
   }
 
-  async create() {
+  async create(input: StaffMemberCreateInput) {
     const staffMember = this.staffMemberRepository.create({
-      email: 'someone@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      name: 'John Doe',
-      initials: ['J', 'D'],
-      shop: { 
-        name: 'My Shop',
-        email: 'someone@example.com',
-        url: 'https://example.com',
-       },
+      email: input.email,
+      firstName: input.firstName,
+      lastName: input.lastName,
+      name: input.name,
+      initials: input.initials,
+      phone: input.phone,
+      shopId: input.shopId,
+      active: true,
     });
     return this.staffMemberRepository.save(staffMember);
   }

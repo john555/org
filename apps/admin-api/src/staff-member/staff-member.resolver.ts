@@ -10,6 +10,7 @@ import { StaffMember } from './staff-member.entity';
 import { StaffMemberService } from './staff-member.service';
 import { NotFoundException } from '@nestjs/common';
 import { ShopService } from '@/shop/shop.service';
+import { StaffMemberCreateInput } from './staff-member.dtos';
 
 @Resolver(() => StaffMember)
 export class StaffMemberResolver {
@@ -29,12 +30,11 @@ export class StaffMemberResolver {
 
   @ResolveField()
   async shop(@Parent() staffMember: StaffMember) {
-    console.log('staffMember', staffMember);
     return this.shopService.findOneByStaffMemberId(staffMember.id);
   }
 
   @Mutation(() => StaffMember)
-  async createStaffMember(): Promise<StaffMember> {
-    return this.staffMemberService.create();
+  async createStaffMember(@Args('input') input: StaffMemberCreateInput): Promise<StaffMember> {
+    return this.staffMemberService.create(input);
   }
 }
