@@ -1,7 +1,10 @@
 import { Inject } from '@nestjs/common';
 import { StaffMember } from './staff-member.entity';
 import { Repository } from 'typeorm';
-import { StaffMemberCreateInput } from './staff-member.dtos';
+import {
+  StaffMemberCreateInput,
+  StaffMemberUpdateInput,
+} from './staff-member.dtos';
 
 export class StaffMemberService {
   constructor(
@@ -33,5 +36,12 @@ export class StaffMemberService {
       active: true,
     });
     return this.staffMemberRepository.save(staffMember);
+  }
+
+  async update(input: StaffMemberUpdateInput) {
+    await this.staffMemberRepository.update(input.id, {
+      ...input,
+    });
+    return this.staffMemberRepository.findOne({ where: { id: input.id } });
   }
 }
