@@ -1,4 +1,4 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Logger } from '@nestjs/common';
 import { StaffMember } from './staff-member.entity';
 import { Repository } from 'typeorm';
 import {
@@ -12,7 +12,7 @@ export class StaffMemberService {
   constructor(
     @Inject('STAFF_MEMBER_REPOSITORY')
     private readonly staffMemberRepository: Repository<StaffMember>,
-    private readonly eventEmitter: EventEmitter2
+    private readonly eventEmitter: EventEmitter2,
   ) {}
 
   async findOneById(id: string) {
@@ -52,6 +52,6 @@ export class StaffMemberService {
 
   @OnEvent(STAFF_MEMBER_CREATED)
   async staffMemberCreatedEvent(payload: StaffMember) {
-    console.log(`Staff member created with id=${payload.id}`);
+    Logger.log(`Staff member created with id=${payload.id}`, 'StaffMemberService');
   }
 }
