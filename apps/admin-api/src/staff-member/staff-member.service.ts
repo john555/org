@@ -5,11 +5,14 @@ import {
   StaffMemberCreateInput,
   StaffMemberUpdateInput,
 } from './staff-member.dtos';
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter';
+import { STAFF_MEMBER_CREATED } from '@/constants/events';
 
 export class StaffMemberService {
   constructor(
     @Inject('STAFF_MEMBER_REPOSITORY')
-    private readonly staffMemberRepository: Repository<StaffMember>
+    private readonly staffMemberRepository: Repository<StaffMember>,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   async findOneById(id: string) {
@@ -35,7 +38,9 @@ export class StaffMemberService {
       shopId: input.shopId,
       active: true,
     });
-    return this.staffMemberRepository.save(staffMember);
+    const createdStaffMember = await this.staffMemberRepository.save(staffMember);
+    this.eventEmitter.emit(STAFF_MEMBER_CREATED, createdStaffMember);
+    return createdStaffMember;
   }
 
   async update(input: StaffMemberUpdateInput) {
@@ -43,5 +48,10 @@ export class StaffMemberService {
       ...input,
     });
     return this.staffMemberRepository.findOne({ where: { id: input.id } });
+  }
+
+  @OnEvent(STAFF_MEMBER_CREATED)
+  async staffMemberCreatedEvent(payload: StaffMember) {
+    console.log(`Staff member created with id=${payload.id}`);
   }
 }

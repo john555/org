@@ -11,9 +11,19 @@ import { GraphQLFormattedError } from 'graphql';
 import { ConfigModule } from '@nestjs/config';
 import { exampleConfig } from '@/config/example';
 import { ShopModule } from '@/shop/shop.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
+    EventEmitterModule.forRoot({
+      wildcard: false,
+      delimiter: '.',
+      newListener: false,
+      removeListener: false,
+      maxListeners: 10,
+      verboseMemoryLeak: false,
+      ignoreErrors: false,
+    }),
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env'],
