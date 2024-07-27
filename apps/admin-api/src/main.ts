@@ -13,7 +13,7 @@ config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  const globalPrefix = 'api';
+  const globalPrefix = 'graphql';
   app.setGlobalPrefix(globalPrefix);
   app.useGlobalPipes(new ValidationPipe());
   const port = process.env.PORT || 4000;
