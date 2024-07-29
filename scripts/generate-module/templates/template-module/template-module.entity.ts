@@ -1,3 +1,4 @@
+import { Paginated } from '@/pagination';
 import { Field, ID, ObjectType } from '@nestjs/graphql';
 import {
   CreateDateColumn,
@@ -23,3 +24,6 @@ export class TemplateModule {
   @Field(() => Date, { description: 'Date the TemplateModule was created' })
   createdAt: Date;
 }
+
+@ObjectType()
+export class PaginatedTemplateModule extends Paginated(TemplateModule) {}

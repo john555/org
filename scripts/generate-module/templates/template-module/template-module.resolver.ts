@@ -1,23 +1,33 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { NotFoundException } from '@nestjs/common';
-import { TemplateModule } from './template-module.entity';
+import { PaginatedTemplateModule, TemplateModule } from './template-module.entity';
 import { TemplateModuleService } from './template-module.service';
 import {
   TemplateModuleCreateInput,
   TemplateModuleUpdateInput,
 } from './template-module.dtos';
+import { PaginationArgs } from '@/pagination/pagination.dtos';
 
 @Resolver(() => TemplateModule)
 export class TemplateModuleResolver {
   constructor(private readonly templateModuleService: TemplateModuleService) {}
 
-  @Query(() => TemplateModule)
+  @Query(() => TemplateModule!)
   async module(@Args('id') id: string): Promise<TemplateModule> {
     const templateModule = await this.templateModuleService.findOneById(id);
     if (!templateModule) {
       throw new NotFoundException('TemplateModule not found');
     }
     return templateModule;
+  }
+
+  @Query(() => PaginatedTemplateModule)
+  async modules(
+    @Args() pagination: PaginationArgs,
+  ): Promise<PaginatedTemplateModule> {
+    return  this.templateModuleService.getPaginatedTemplateModule(
+     pagination
+    );
   }
 
   @Mutation(() => TemplateModule)

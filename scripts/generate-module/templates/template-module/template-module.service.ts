@@ -6,6 +6,8 @@ import {
   TemplateModuleUpdateInput,
 } from './template-module.dtos';
 import { EventEmitter2 } from '@nestjs/event-emitter';
+import { PaginationArgs } from '@/pagination/pagination.dtos';
+import { paginate } from '@/pagination/paginate';
 
 export class TemplateModuleService {
   constructor(
@@ -18,6 +20,11 @@ export class TemplateModuleService {
     return this.templateModuleRepository.findOne({
       where: { id },
     });
+  }
+
+  async getPaginatedTemplateModule(pagination: PaginationArgs) {
+    const query = await this.templateModuleRepository.createQueryBuilder().select();
+    return paginate(query, pagination);
   }
 
   async create(input: TemplateModuleCreateInput) {
